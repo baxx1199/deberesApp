@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Que debo hacer?</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style_cards.css">
 </head>
 <body>
     <header>
         <div class="cont-title">
             <h1>¿Que debo hacer?</h1>
-            <span>To-do list</span>
+            <small>To-do list</small>
         </div>
         <nav>
             <ul>
-                <li>Home</li>
-                <li>Deberes</li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Deberes</a></li>
                 
             </ul>
         </nav>
@@ -36,9 +38,38 @@
                 <label for="pickerDateFinal">Fecha limite:</label>
                 <input type="datetime-local" name="finaleDate" id="pickerDateFinal">
 
-                <button>Guardar</button>
+                <label for="txtDescription">Descripcion de la tarea</label>
+                <input type="text" name="description" id="txtDescription">
+                
+                <button id="btnSave">Guardar</button>
             </form>
         </div>
+        <div class="cont-workshop">
+            <div class="cont-workshop-title">
+
+                <h2>Tareas pendientes</h2>
+            </div>
+            <div class="cont" id="cont">
+               
+                    
+                <div class="card" id="card">
+                    <small class="remaining" id="days_remaining">3 days</small>
+                    <h3>titulo</h3>
+                    <small class="date_label start_date">Inicio: <span>00/00/00 00:00hrs</span></small>
+                    <small class="date_label final_date">Final: <span>00/00/00 00:00hrs</span></small>
+                    <p class="card_decription">
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                    <div class="options">
+                        <button class="op op_edit">Editar</button>
+                        <button class="op op_delete">Eliminar</button>
+                        <button class="op op_details">Ver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+    
+    <script src="js/index.js" type="module"></script>
 </body>
 </html>

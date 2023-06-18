@@ -1,0 +1,74 @@
+.cont-workshop{
+    display: flex;
+    flex-direction: column;
+
+}
+.cont-workshop .cont-workshop-title{
+    border-bottom:5px#242936 solid;
+    margin-bottom: 15px;
+    height: 50px;
+    display: flex;
+    align-items:  center;
+}
+.cont-workshop h2{
+    width: 100%;
+    text-align: center;
+   
+}
+.cont-workshop .cont{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    
+}
+.cont-workshop .cont .card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+   border-radius: 5px;
+   box-sizing: border-box;
+   border: 2px solid #F7F0F0;
+   padding: 7px 10px;
+   position: relative;
+   
+   background: #84828f23;
+}
+.cont-workshop .cont .card h3{
+    width: 100%;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+}
+
+.cont-workshop .cont .card .remaining{
+    border-radius: 5px;
+    background: rgb(200, 69, 69);
+    padding: 3px;
+    position: absolute;
+    right: 10px;
+}
+.cont-workshop .cont .card .date_label{
+    width: 95%;
+    margin: 5px auto;
+    padding: 3px 2px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-weight: bold;
+
+}
+.cont-workshop .cont .card .date_label span{
+    margin-left: 5px;
+    font-weight: 100;
+
+}
+
+.cont-workshop .cont .card .final_date{
+    
+    background: #242936;
+}
+
+.cont-workshop .cont .card p{
+    
+    font-size: 14px;
+}
