@@ -29,22 +29,34 @@
    box-sizing: border-box;
    border: 2px solid #F7F0F0;
    padding: 7px 10px;
-   position: relative;
+   
    
    background: #84828f23;
 }
+.cont-workshop .cont .card .card_header{
+    display: flex;
+    flex-direction: row;
+    
+}
 .cont-workshop .cont .card h3{
-    width: 100%;
+    width: 80%;
     margin-bottom: 7px;
     text-transform: uppercase;
+    padding-right: 10px;
 }
 
 .cont-workshop .cont .card .remaining{
     border-radius: 5px;
     background: rgb(200, 69, 69);
-    padding: 3px;
-    position: absolute;
-    right: 10px;
+    padding: 5px 3px;
+    min-width: max-content;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: fit-content;
+    box-sizing: border-box;
+
 }
 .cont-workshop .cont .card .date_label{
     width: 95%;
@@ -71,4 +83,38 @@
 .cont-workshop .cont .card p{
     
     font-size: 14px;
+}
+.cont-workshop .cont .card .options{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 7px;
+}
+
+.cont-workshop .cont .card .options .op{
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #F7F0F0;
+    color: #F7F0F0;
+    border-radius: 5px;
+    padding: 0px 3px;
+}
+.cont-workshop .cont .card .options .op:hover{
+    border: 1px solid #FE7F2D;
+    
+    background: #2b2b2de3;
+    color: #FE7F2D;
+    transition: all 0.3s ease;
+    box-shadow: #3d3c3e95;
+}
+.op_edit{
+    background: rgba(94, 241, 212, 0.647);
+}
+.op_delete{
+    background: rgba(241, 106, 94, 0.647);
+}
+.op_details{
+    background: rgba(128, 241, 94, 0.647);
 }
