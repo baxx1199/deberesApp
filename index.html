@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Que debo hacer?</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/style_cards.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
+
 <body>
     <header>
         <div class="cont-title">
@@ -17,7 +20,7 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Deberes</a></li>
-                
+
             </ul>
         </nav>
     </header>
@@ -40,7 +43,7 @@
 
                 <label for="txtDescription">Descripcion de la tarea</label>
                 <input type="text" name="description" id="txtDescription">
-                
+
                 <button id="btnSave">Guardar</button>
             </form>
         </div>
@@ -50,8 +53,8 @@
                 <h2>Tareas pendientes</h2>
             </div>
             <div class="cont" id="cont">
-               
-                    
+
+
                 <!-- <div class="card" id="card">
 
                     <div class="card_header">
@@ -73,7 +76,40 @@
             </div>
         </div>
     </section>
-    
+    <div class="cont-modal" id="cont-modal">
+        <div class="modal" id="modal">
+            <button class="btn_close" id="btn_close">X</button>
+            <div class="modal_header">
+                <h2>Lorem ipsum dolor sit amet.</h2>
+                <small class="remaining" id="days_remaining_modal">3 days</small>
+            </div>
+            <div class="cont-dates">
+
+                <small class="date_label_modal start_date">Inicio de tarea: <span>00/00/00 00:00hrs</span></small>
+                <small class="date_label_modal final_date">Final de la tarea: <span>00/00/00 00:00hrs</span></small>
+            </div>
+            <div class="modal_group">
+                <small>Grupo: <span class="group-name">proyecto 1</span> </small>
+            </div>
+            <p class="description_modal">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem accusantium aliquam rerum eligendi
+                delectus tempore ab consequuntur. Nulla, eum ex!
+            </p>
+            <small class="level">prioridad: <span class="level-tag level-tag-mid">medio</span> <span
+                    class="level-tag level-tag-low">baja</span> <span
+                    class="level-tag level-tag-high">alta</span></small>
+
+            <div class="modal_tags">
+                tags:
+                <ul>
+                    <li>salud</li>
+                    <li>estudio</li>
+                    <li>juego</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <script src="js/index.js" type="module"></script>
 </body>
+
 </html>

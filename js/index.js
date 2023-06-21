@@ -4,15 +4,13 @@ import RemainingDay from "./RemainingDay.js";
 const task_name = document.getElementById("txtName"),
   initial_date = document.getElementById("pickerDateStart"),
   final_date = document.getElementById("pickerDateFinal"),
-  task_description = document.getElementById("txtDescription");
+  task_description = document.getElementById("txtDescription"),
+  modal_cont = document.getElementById("cont-modal");
 
 let task_card_cont = document.getElementById("cont");
 
-const btn_save = document.getElementById("btnSave");
-
-let btns_delete,
-  btn_edit_taks = document.getElementById("btnEdit"),
-  btn_details_taks = document.getElementById("btnDetails");
+const btn_save = document.getElementById("btnSave"),
+  btn_close_modal = document.getElementById("btn_close");
 
 const myStorage = window.localStorage;
 let counter = 0;
@@ -101,22 +99,28 @@ function save_task(e) {
   }
 }
 
+function format_date(date) {
+  let final_date_cut = date.split("T");
+  let date_to_string = final_date_cut[0] + " " + final_date_cut[1] + " hrs";
+
+  return date_to_string;
+}
+
 function clean_inputs() {
   task_name.value = "";
   initial_date.value = "";
   final_date.value = "";
   task_description.value = "";
 }
-function pruebaJ(t) {
-  console.log("ejecutando prueba");
-  console.log(t);
-}
-
 
 /* This method creates all task cards that are in storage */
 function create_card() {
-    get_task_From_storage(); //First you get the tasks that are in the storage and define a local varibale will container the html in string format and remaining time of every task  
-    let string_card = "", remaining;
+  get_task_From_storage(); //First you get the tasks that are in the storage and define a local varibale will container the html in string format and remaining time of every task
+  let string_card = "",
+    remaining;
+  if (tasks.length == 0) {
+    string_card = `<h2>No hay tareas pendientes<h2>`;
+  }
   tasks.forEach((task) => {
     remaining = new RemainingDay(task.final_date, new Date()); //get the remaining time of the actually task
     string_card += ` 
@@ -139,58 +143,133 @@ function create_card() {
                 <button class="op op_delete" data-index-task="${
                   task.id_task
                 }"  >Eliminar</button>
-                <button class="op op_details"  >Ver</button>
+                <button class="op op_details" data-index-task="${
+                  task.id_task
+                }"  >Ver</button>
             </div>
         </div>`;
   });
 
   task_card_cont.innerHTML = string_card;
-  assigment_delete_event();//Once the cards are created, all buttons must be assigned their respective event. this mapping must be done after the cards created because some properties are initialized during creation.
+  assigment_delete_event(); //Once the cards are created, all buttons must be assigned their respective event. this mapping must be done after the cards created because some properties are initialized during creation.
+  assigment_details_event();
 }
 
 /* 
     This method will assign a event lisener to all buttons
 */
 function assigment_delete_event() {
-  document.querySelectorAll(".op_delete").forEach(btn => {
+  document.querySelectorAll(".op_delete").forEach((btn) => {
     btn.addEventListener("click", () => {
       delete_task(btn.dataset.indexTask);
-      
+    });
+  });
+}
+
+function assigment_details_event() {
+  document.querySelectorAll(".op_details").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      see_details_task(btn.dataset.indexTask);
     });
   });
 }
 /* this method eliminates a task from storage and return new array with remaining tasks
     This should receive a parameter that indicates the ID of the item to be deleted
 */
-function delete_task(id) {
+function delete_task(id_to_find) {
   let temp = tasks;
+  let position = get_position_in_array(id_to_find);
 
-  if (temp.length) {
-    temp.forEach((task) => {
-      if (task.id_task == id) {
-        temp.splice(temp.indexOf(task), 1);
-      }
-    });
+  if (!temp.length) {
+    alert("no hay tareas pendietes");
+    return;
+  }
+  if (position == -1) {
+    alert("tarea no encontrada");
+    return;
   }
 
+  temp.splice(position, 1);
   tasks = temp;
   send_task_to_storage();
   create_card();
 }
-
+/* 
+  if the item is found return a number with the position of the element in the array
+  but isn't found return -1
+*/
+function get_position_in_array(id) {
+  let temp = tasks;
+  let position = -1;
+  if (temp.length) {
+    temp.forEach((task) => {
+      if (task.id_task == id) {
+        position = temp.indexOf(task);
+        return;
+      }
+    });
+  }
+  return position;
+}
 /* Method for updating or modifying the details of a task */
 
-function update_task(params) {
-    
-}
-
+function update_task(id) {}
 
 /* This method opens a modal that displays all the details of the selected task */
-function see_details_task() {
-    
+function see_details_task(id) {
+  let position = get_position_in_array(id);
+  let string_modal = "";
+  let task_for_modal, remaining;
+  if (position == -1) {
+    alert("tarea no encontrada");
+    return;
+  }
+
+  task_for_modal = tasks[position];
+  remaining = new RemainingDay(task_for_modal.final_date, new Date());
+  string_modal = `
+  <button class="btn_close" id="btn_close">X</button>
+  <div class="modal_header">
+      <h2>${task_for_modal.task_name}</h2>
+      <small class="remaining" id="days_remaining_modal">${remaining.remaining_ToString()}</small>
+  </div>
+  <div class="cont-dates">
+
+      <small class="date_label_modal start_date">Inicio de tarea: <span>${format_date(
+        task_for_modal.initial_date
+      )}</span></small>
+      <small class="date_label_modal final_date">Final de la tarea: <span>${format_date(
+        task_for_modal.final_date
+      )}</span></small>
+  </div>
+  <div class="modal_group">
+      <small>Grupo: <span class="group-name">proyecto 1</span>   </small>
+  </div>
+  <p class="description_modal">
+    ${task_for_modal.description_task}
+  </p>
+  <small class="level">prioridad: <span class="level-tag level-tag-mid">medio</span> <span class="level-tag level-tag-low">baja</span> <span class="level-tag level-tag-high">alta</span></small>
+  
+  <div class="modal_tags">
+      tags:
+      <ul>
+          <li>salud</li>
+          <li>estudio</li>
+          <li>juego</li>
+      </ul>
+  </div>
+  `;
+
+  document.getElementById("modal").innerHTML = string_modal;
+  modal_cont.classList.add("modal-open");
+  console.log(id);
 }
 
+function close_modal() {
+  modal_cont.classList.remove("modal-open");
+}
 
 /* assigment of the events */
 btn_save.addEventListener("click", save_task);
 window.addEventListener("load", create_card);
+btn_close_modal.addEventListener("click", close_modal);

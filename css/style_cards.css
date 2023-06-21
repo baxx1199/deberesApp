@@ -1,120 +1,114 @@
-.cont-workshop{
-    display: flex;
-    flex-direction: column;
-
+.cont-workshop {
+  display: flex;
+  flex-direction: column;
 }
-.cont-workshop .cont-workshop-title{
-    border-bottom:5px#242936 solid;
-    margin-bottom: 15px;
-    height: 50px;
-    display: flex;
-    align-items:  center;
+.cont-workshop .cont-workshop-title {
+  border-bottom: 5px#242936 solid;
+  margin-bottom: 15px;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
-.cont-workshop h2{
-    width: 100%;
-    text-align: center;
-   
+.cont-workshop h2 {
+  width: 100%;
+  text-align: center;
 }
-.cont-workshop .cont{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    
+.cont-workshop .cont {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
 }
-.cont-workshop .cont .card{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-   border-radius: 5px;
-   box-sizing: border-box;
-   border: 2px solid #F7F0F0;
-   padding: 7px 10px;
-   
-   
-   background: #84828f23;
+.cont-workshop .cont .card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 2px solid #f7f0f0;
+  padding: 7px 10px;
+  background: #84828f23;
+  transition: border 0.3s ease;
 }
-.cont-workshop .cont .card .card_header{
-    display: flex;
-    flex-direction: row;
-    
-}
-.cont-workshop .cont .card h3{
-    width: 80%;
-    margin-bottom: 7px;
-    text-transform: uppercase;
-    padding-right: 10px;
+.cont-workshop .cont .card:hover {
+  border: 2px solid #fe7f2d;
 }
 
-.cont-workshop .cont .card .remaining{
-    border-radius: 5px;
-    background: rgb(200, 69, 69);
-    padding: 5px 3px;
-    min-width: max-content;
-    width: 20%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    height: fit-content;
-    box-sizing: border-box;
-
+.cont-workshop .cont .card .card_header {
+  display: flex;
+  flex-direction: row;
 }
-.cont-workshop .cont .card .date_label{
-    width: 95%;
-    margin: 5px auto;
-    padding: 3px 2px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-weight: bold;
-
-}
-.cont-workshop .cont .card .date_label span{
-    margin-left: 5px;
-    font-weight: 100;
-
+.cont-workshop .cont .card h3 {
+  width: 80%;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  padding-right: 10px;
 }
 
-.cont-workshop .cont .card .final_date{
-    
-    background: #242936;
+.cont-workshop .cont .card .remaining {
+  border-radius: 5px;
+  background: rgb(200, 69, 69);
+  padding: 5px 3px;
+  min-width: max-content;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.cont-workshop .cont .card .date_label {
+  width: 95%;
+  margin: 5px auto;
+  padding: 3px 2px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-weight: bold;
+}
+.cont-workshop .cont .card .date_label span {
+  margin-left: 5px;
+  font-weight: 100;
 }
 
-.cont-workshop .cont .card p{
-    
-    font-size: 14px;
-}
-.cont-workshop .cont .card .options{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    margin-top: 7px;
+.cont-workshop .cont .card .final_date {
+  background: #242936;
 }
 
-.cont-workshop .cont .card .options .op{
-    width: 100%;
-    height: 30px;
-    cursor: pointer;
-    border: 1px solid #F7F0F0;
-    color: #F7F0F0;
-    border-radius: 5px;
-    padding: 0px 3px;
+.cont-workshop .cont .card p {
+  font-size: 14px;
 }
-.cont-workshop .cont .card .options .op:hover{
-    border: 1px solid #FE7F2D;
-    
-    background: #2b2b2de3;
-    color: #FE7F2D;
-    transition: all 0.3s ease;
-    box-shadow: #3d3c3e95;
+.cont-workshop .cont .card .options {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 7px;
 }
-.op_edit{
-    background: rgba(94, 241, 212, 0.647);
+
+.cont-workshop .cont .card .options .op {
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+  border: 1px solid #f7f0f0;
+  color: #f7f0f0;
+  border-radius: 5px;
+  padding: 0px 3px;
 }
-.op_delete{
-    background: rgba(241, 106, 94, 0.647);
+.cont-workshop .cont .card .options .op:hover {
+  border: 1px solid #fe7f2d;
+
+  background: #2b2b2de3;
+  color: #fe7f2d;
+  transition: all 0.3s ease;
+  box-shadow: #3d3c3e95;
 }
-.op_details{
-    background: rgba(128, 241, 94, 0.647);
+.op_edit {
+  background: rgba(94, 241, 212, 0.647);
+}
+.op_delete {
+  background: rgba(241, 106, 94, 0.647);
+}
+.op_details {
+  background: rgba(128, 241, 94, 0.647);
 }

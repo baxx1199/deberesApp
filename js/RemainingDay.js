@@ -4,6 +4,8 @@ export default class RemainingDay {
   current_month;
   current_day;
 
+
+
   remaining_year;
   remaining_months;
   remaining_days;
@@ -82,6 +84,7 @@ export default class RemainingDay {
     return remaining_string;
   }
 }
+
 
 
 /* 
