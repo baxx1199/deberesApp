@@ -1,10 +1,11 @@
-import Task from "./Taks.js";
+import Task from "./Task.js";
 import RemainingDay from "./RemainingDay.js";
 //define global constants and variables how the reference changes for entries and DOM elements that we do not want to change or will use multiple times
 const task_name = document.getElementById("txtName"),
   initial_date = document.getElementById("pickerDateStart"),
   final_date = document.getElementById("pickerDateFinal"),
   task_description = document.getElementById("txtDescription"),
+  task_id_code = document.getElementById("txtId"),
   modal_cont = document.getElementById("cont-modal");
 
 let task_card_cont = document.getElementById("cont");
@@ -77,26 +78,47 @@ function save_task(e) {
   if (!validation_of_inputs(e)) {
     console.log("error");
     return;
-  } else {
-    get_task_From_storage();
-    get_counterID_from_storage();
+  } 
+  console.log(btn_save.textContent)
+    if(btn_save.textContent == "actualizar"){
+      console.log("entro")
+      task=tasks[task_id_code.value]
 
-    task = new Task(
-      task_name.value,
-      initial_date.value,
-      final_date.value,
-      task_description.value,
-      counter
-    );
-    tasks.push(task);
-    counter++;
+      task.task_name = task_name.value;
+      task.initial_date = initial_date.value;
+      task.final_date = final_date.value;
+      task.description_task = task_description.value;
+      task.id_task = task_id_code.value;
+
+
+      tasks[task_id_code.value] = task
+
+      
+    }
+
+    if(btn_save.textContent == "Guardar"){
+      console.log("entro a guardar")
+      get_task_From_storage();
+      get_counterID_from_storage();
+
+      task = new Task(
+        task_name.value,
+        initial_date.value,
+        final_date.value,
+        task_description.value,
+        counter
+      );
+      tasks.push(task);
+      counter++;
+      send_counterID_to_storage();
+    }
+
+    
     send_task_to_storage();
-    send_counterID_to_storage();
-
     clean_inputs();
-
     create_card();
-  }
+    btn_save.innerText= "Guardar";
+  
 }
 
 function format_date(date) {
@@ -139,7 +161,9 @@ function create_card() {
                 ${task.description_task}
             </p>
             <div class="options">
-                <button class="op op_edit" >Editar</button>
+                <button class="op op_edit" data-index-task="${task.id_task}">Editar</button>
+
+
                 <button class="op op_delete" data-index-task="${
                   task.id_task
                 }"  >Eliminar</button>
@@ -153,6 +177,7 @@ function create_card() {
   task_card_cont.innerHTML = string_card;
   assigment_delete_event(); //Once the cards are created, all buttons must be assigned their respective event. this mapping must be done after the cards created because some properties are initialized during creation.
   assigment_details_event();
+  assigment_edit_event();
 }
 
 /* 
@@ -170,6 +195,14 @@ function assigment_details_event() {
   document.querySelectorAll(".op_details").forEach((btn) => {
     btn.addEventListener("click", () => {
       see_details_task(btn.dataset.indexTask);
+    });
+  });
+}
+
+function assigment_edit_event() {
+  document.querySelectorAll(".op_edit").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      update_task(btn.dataset.indexTask);
     });
   });
 }
@@ -194,6 +227,12 @@ function delete_task(id_to_find) {
   send_task_to_storage();
   create_card();
 }
+
+function close_modal() {
+  modal_cont.classList.remove("modal-open");
+  console.log("cerrar")
+}
+
 /* 
   if the item is found return a number with the position of the element in the array
   but isn't found return -1
@@ -213,7 +252,19 @@ function get_position_in_array(id) {
 }
 /* Method for updating or modifying the details of a task */
 
-function update_task(id) {}
+function update_task(id, ) {
+    let position = get_position_in_array(id);
+    let  task_to_edit = tasks[position];
+
+    task_name.value = task_to_edit.task_name;
+    initial_date.value = task_to_edit.initial_date;
+    final_date.value = task_to_edit.final_date;
+    task_description.value = task_to_edit.description_task;
+    task_id_code.value = task_to_edit.id_task;
+
+    btn_save.innerText = "actualizar";
+
+}
 
 /* This method opens a modal that displays all the details of the selected task */
 function see_details_task(id) {
@@ -262,14 +313,10 @@ function see_details_task(id) {
 
   document.getElementById("modal").innerHTML = string_modal;
   modal_cont.classList.add("modal-open");
-  console.log(id);
-}
-
-function close_modal() {
-  modal_cont.classList.remove("modal-open");
+  document.getElementById("btn_close").addEventListener("click", close_modal);
 }
 
 /* assigment of the events */
 btn_save.addEventListener("click", save_task);
 window.addEventListener("load", create_card);
-btn_close_modal.addEventListener("click", close_modal);
+
