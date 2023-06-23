@@ -79,11 +79,11 @@ function save_task(e) {
     console.log("error");
     return;
   } 
-  console.log(btn_save.textContent)
+  
     if(btn_save.textContent == "actualizar"){
-      console.log("entro")
-      task=tasks[task_id_code.value]
-
+      
+      task=tasks[get_position_in_array( task_id_code.value)]
+      
       task.task_name = task_name.value;
       task.initial_date = initial_date.value;
       task.final_date = final_date.value;
@@ -91,13 +91,13 @@ function save_task(e) {
       task.id_task = task_id_code.value;
 
 
-      tasks[task_id_code.value] = task
+      tasks[get_position_in_array( task_id_code.value)] = task
 
       
     }
 
     if(btn_save.textContent == "Guardar"){
-      console.log("entro a guardar")
+      
       get_task_From_storage();
       get_counterID_from_storage();
 
@@ -137,43 +137,52 @@ function clean_inputs() {
 
 /* This method creates all task cards that are in storage */
 function create_card() {
+  
   get_task_From_storage(); //First you get the tasks that are in the storage and define a local varibale will container the html in string format and remaining time of every task
   let string_card = "",
     remaining;
   if (tasks.length == 0) {
     string_card = `<h2>No hay tareas pendientes<h2>`;
   }
+  
+ 
   tasks.forEach((task) => {
-    remaining = new RemainingDay(task.final_date, new Date()); //get the remaining time of the actually task
-    string_card += ` 
-        <div class="card" >
-            <div class="card_header">
-                <h3>${task.task_name}</h3>
-                <small class="remaining" id="days_remaining">${remaining.remaining_ToString()}</small>
-            </div>
-                <small class="date_label start_date">Inicio: <span>${
-                  task.initial_date
-                }hrs</span></small>
-                 <small class="date_label final_date">Final: <span>${
-                   task.final_date
-                 }hrs</span></small>
-            <p>
-                ${task.description_task}
-            </p>
-            <div class="options">
-                <button class="op op_edit" data-index-task="${task.id_task}">Editar</button>
-
-
-                <button class="op op_delete" data-index-task="${
-                  task.id_task
-                }"  >Eliminar</button>
-                <button class="op op_details" data-index-task="${
-                  task.id_task
-                }"  >Ver</button>
-            </div>
-        </div>`;
+    
+    if(task!=null){
+      
+      remaining = new RemainingDay(task.final_date, new Date()); //get the remaining time of the actually task
+      string_card += ` 
+          <div class="card" >
+              <div class="card_header">
+                  <h3>${task.task_name}</h3>
+                  <small class="remaining" id="days_remaining">${remaining.remaining_ToString()}</small>
+              </div>
+                  <small class="date_label start_date">Inicio: <span>${
+                    task.initial_date
+                  }hrs</span></small>
+                   <small class="date_label final_date">Final: <span>${
+                     task.final_date
+                   }hrs</span></small>
+              <p>
+                  ${task.description_task}
+              </p>
+              <div class="options">
+                  <button class="op op_edit" data-index-task="${task.id_task}">Editar</button>
+  
+  
+                  <button class="op op_delete" data-index-task="${
+                    task.id_task
+                  }"  >Eliminar</button>
+                  <button class="op op_details" data-index-task="${
+                    task.id_task
+                  }"  >Ver</button>
+              </div>
+          </div>`;
+    }
+    
+    
   });
-
+  
   task_card_cont.innerHTML = string_card;
   assigment_delete_event(); //Once the cards are created, all buttons must be assigned their respective event. this mapping must be done after the cards created because some properties are initialized during creation.
   assigment_details_event();
@@ -230,7 +239,7 @@ function delete_task(id_to_find) {
 
 function close_modal() {
   modal_cont.classList.remove("modal-open");
-  console.log("cerrar")
+ 
 }
 
 /* 
@@ -242,6 +251,7 @@ function get_position_in_array(id) {
   let position = -1;
   if (temp.length) {
     temp.forEach((task) => {
+      
       if (task.id_task == id) {
         position = temp.indexOf(task);
         return;
@@ -250,17 +260,21 @@ function get_position_in_array(id) {
   }
   return position;
 }
+
+
+
 /* Method for updating or modifying the details of a task */
 
 function update_task(id, ) {
     let position = get_position_in_array(id);
     let  task_to_edit = tasks[position];
-
+   
     task_name.value = task_to_edit.task_name;
     initial_date.value = task_to_edit.initial_date;
     final_date.value = task_to_edit.final_date;
     task_description.value = task_to_edit.description_task;
     task_id_code.value = task_to_edit.id_task;
+
 
     btn_save.innerText = "actualizar";
 
@@ -320,3 +334,4 @@ function see_details_task(id) {
 btn_save.addEventListener("click", save_task);
 window.addEventListener("load", create_card);
 
+/* Add a method to check if a task is null This task must be deleted and release its identifier number*/
