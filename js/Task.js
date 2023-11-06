@@ -3,6 +3,8 @@ export default class Task {
   initial_date;
   final_date;
   description_task;
+  tags;
+  priority_lvl;
   remaining_time;
   id_task;
 

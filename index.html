@@ -25,30 +25,98 @@
         </nav>
     </header>
     <section>
-        <div class="cont-form">
-            <div>
+        <div class="form_row">
+            <div class="cont_form_new_task">
 
-                <h2>Agregar tarea</h2>
+            <div class="cont-form">
+
+                <div>
+
+                    <h2>Agregar tarea</h2>
+                </div>
+                <form action="">
+
+                    <input type="hidden" name="id_task" id="txtId">
+
+                    <label for="txtName">Nombre de la tarea</label>
+                    <input type="text" name="name" id="txtName">
+                    
+                    <div>
+                        <label for="txt_name_group">Grupo:</label>
+                        <input type="text" list="list_task_groups_names"  placeholder="seleccione un grupo" name="txt_name_group" id="id_txt_name_group" >
+
+                        <datalist id="list_task_groups_names" >
+                            
+                          </datalist>
+                    </div>
+                    <div>
+                        <label for="txt_name_tag">Tags:</label>
+                        <input type="text" list="list_task_name_tags"  placeholder="Ej: Cumpleaños" name="txt_name_tag" id="id_txt_name_tag" >
+
+                        <datalist id="list_task_name_tags" >
+                            
+                        </datalist>
+
+                          <div class="prev_tags">
+                            <div class="cont_tag">tag1</div>
+                            
+                          </div>
+                    </div>
+                    <div class="cont-form-date">
+                        <div class="cont-date">
+
+                            <label for="pickerDateStart">Fecha inicio:</label>
+                            <input type="datetime-local" name="startDate" id="pickerDateStart">
+                        </div>
+
+                        <div class="cont-date">
+
+                            <label for="pickerDateFinal">Fecha limite:</label>
+                            <input type="datetime-local" name="finaleDate" id="pickerDateFinal">
+                        </div>
+                    </div>
+
+                    <label for="txtDescription">Descripcion de la tarea</label>
+                    <input type="text" name="description" id="txtDescription">
+                    <div class="priority_area">
+
+
+                        <label for="priority">Prioridad</label>
+                        <div class="rd_area">
+
+
+                            <label for="priority_lv_1">Baja</label>
+                            <input type="radio" name="priority_lv" id="rd_priority_lv_1" value="lv_1">
+                            <label for="priority_lv_2">Media</label>
+                            <input type="radio" name="priority_lv" id="rd_priority_lv_2" value="lv_2">
+                            <label for="priority_lv_3">Alta</label>
+                            <input type="radio" name="priority_lv" id="rd_priority_lv_3" value="lv_3">
+                        </div>
+                    </div>
+
+                    <button id="btnSave">Guardar</button>
+                </form>
             </div>
-            <form action="">
+        </div>
+            <div class="cont_form_group_task">
+                <div class="cont-form">
 
-                <input type="hidden" name="id_task" id="txtId">
+                    <div>
 
-                <label for="txtName">Nombre de la tarea</label>
-                <input type="text" name="name" id="txtName">
+                        <h2>Nuevo Grupo de tareas</h2>
+                    </div>
+                    <form action="">
 
-                <label for="pickerDateStart">Fecha inicio:</label>
-                <input type="datetime-local" name="startDate" id="pickerDateStart">
+                        <input type="hidden" name="id_task_group" id="txtIdGroup">
 
+                        <label for="txtName">Nombre del grupo</label>
+                        <input type="text" name="name_group" id="txtNameGroup">
+                        
 
-                <label for="pickerDateFinal">Fecha limite:</label>
-                <input type="datetime-local" name="finaleDate" id="pickerDateFinal">
-
-                <label for="txtDescription">Descripcion de la tarea</label>
-                <input type="text" name="description" id="txtDescription">
-
-                <button id="btnSave">Guardar</button>
-            </form>
+                        <button id="btnSave_group">Guardar</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="cont-workshop">
             <div class="cont-workshop-title">

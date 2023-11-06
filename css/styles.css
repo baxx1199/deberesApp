@@ -47,7 +47,7 @@ header nav ul li {
 }
 header nav ul li > a {
   text-decoration: none;
-  color: #f7f0f0;
+  color: #f0f7f7;
   width: 120px;
   height: 30px;
   padding: 10px 30px;
@@ -59,10 +59,14 @@ header nav ul li > a:hover {
   background: #797785;
 }
 section {
-  width: 80%;
+  width: 90%;
   margin: auto;
   color: #f7f0f0;
   padding-bottom: 60px;
+  
+}
+section .cont-form  {
+  width: 100%;
 }
 section .cont-form h2 {
   width: 100%;
@@ -73,7 +77,7 @@ section .cont-form h2 {
 section .cont-form form {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width:90%;
   margin: 30px auto;
   padding: 30px 20px;
   border-radius: 0px 5px 5px 0px;
@@ -91,10 +95,21 @@ section .cont-form form input[type="text"] {
   height: 30px;
   line-height: 30px;
 }
+section .cont-form form .cont-form-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+section .cont-form form .cont-form-date .cont-date {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
 section .cont-form form input[type="datetime-local"] {
   height: 40px;
   line-height: 40px;
   border: 1px solid #84828f;
+  width: 100%;
 }
 
 section .cont-form form button {
@@ -121,4 +136,16 @@ section .cont-form form button:hover {
   color: #fe7f2d;
   transition: all 0.3s ease;
   box-shadow: #3d3c3e95;
+}
+
+section .form_row {
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+}
+section .form_row .cont_form_group_task{
+  width: 40%;
+}
+section .form_row .cont_form_new_task{
+  width: 60%;
 }

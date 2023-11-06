@@ -4,8 +4,6 @@ export default class RemainingDay {
   current_month;
   current_day;
 
-
-
   remaining_year;
   remaining_months;
   remaining_days;
@@ -34,12 +32,19 @@ export default class RemainingDay {
       months = Math.floor(aux / 31);
       days = aux - months * 31;
     }
+    if (difference_of_months < 0) {
+      // cuantos meses han pasado, si 1
+      // aux = 30 - diaInicial + diaFinal == dias del mes en que la tarea estuvo activa
+      //si es 2 o mas
+      // month = 30* (-)diferencia de mes - aux
+    }
     if (difference_of_months == 0) {
       aux = Number(this.final_Date[2]);
       days = aux - this.current_day;
     }
     this.remaining_days = days;
     this.remaining_months = months;
+    this.pruebaDiff();
   }
 
   /*
@@ -57,6 +62,39 @@ export default class RemainingDay {
 
     return get_date;
   }
+
+  /* Prueba opcional */
+  pruebaDiff() {
+    let date1 =
+      this.final_Date[0] + "-" + this.final_Date[1] + "-" + this.final_Date[2];
+    let datep = new Date();
+    let date2 =
+      datep.getFullYear() +
+      "-" +
+      Number(datep.getMonth() + 1) +
+      "-" +
+      datep.getDate();
+    let aux1 = new Date(date1);
+    let aux2 = new Date(date2);
+
+    
+    let dif = Math.round((aux1 - aux2) / (1000 * 60 * 60 * 24));
+    let mesesPruebaRestante;
+    let diaPruebaRestante;
+    let añosPruebaRestante;
+
+    if (dif > 30) {
+      mesesPruebaRestante = dif / 30;
+      diaPruebaRestante = Math.round(30 * mesesPruebaRestante);
+    }
+    /*  if (mesesPruebaRestante > 12) {
+      añosPruebaRestante = Math.round(mesesPruebaRestante / 12);
+      mesesPruebaRestante -= añosPruebaRestante * 12;
+    } */
+   
+    
+  }
+
   //this method formats the time remaining to simple text
   remaining_ToString() {
     this.get_full_remaining();
@@ -64,28 +102,31 @@ export default class RemainingDay {
 
     if (this.remaining_year != 0 && this.remaining_months != 0) {
       remaining_string = `${this.remaining_year} años`;
+     
     }
     if (this.remaining_months != 0) {
       remaining_string += ` ${this.remaining_months} meses`;
+      
     }
     if (this.remaining_days > 0) {
       remaining_string += ` ${this.remaining_days} dias`;
+     
     } else if (
       this.remaining_days == 0 &&
       this.remaining_year <= 0 &&
       this.remaining_months <= 0
     ) {
       remaining_string = "Hoy";
+      
     }
     if (this.remaining_days < 0) {
       remaining_string = "Vencida";
+      
     }
 
     return remaining_string;
   }
 }
-
-
 
 /* 
     Notes for future baxx
