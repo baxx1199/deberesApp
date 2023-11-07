@@ -41,26 +41,34 @@
                     <label for="txtName">Nombre de la tarea</label>
                     <input type="text" name="name" id="txtName">
                     
-                    <div>
-                        <label for="txt_name_group">Grupo:</label>
+                    <div class="cont_groups">
+                        <label for="txt_name_group">Grupo</label>
                         <input type="text" list="list_task_groups_names"  placeholder="seleccione un grupo" name="txt_name_group" id="id_txt_name_group" >
 
                         <datalist id="list_task_groups_names" >
                             
                           </datalist>
                     </div>
-                    <div>
-                        <label for="txt_name_tag">Tags:</label>
-                        <input type="text" list="list_task_name_tags"  placeholder="Ej: Cumpleaños" name="txt_name_tag" id="id_txt_name_tag" >
+                    <div class="cont_tags">
+                        <label for="txt_name_tag">Tags</label>
+                        <div class="cont_creation_tag_area">
+                            <input type="text" list="list_task_name_tags"  placeholder="Ej: Cumpleaños" name="txt_name_tag" id="id_txt_name_tag" >
+                            <button id="btnAddtag">Agregar</button>                         
+                        </div>
 
                         <datalist id="list_task_name_tags" >
                             
                         </datalist>
-
-                          <div class="prev_tags">
-                            <div class="cont_tag">tag1</div>
-                            
-                          </div>
+                        <div class="areaSeeTags">
+                            <div class="allTagsAdded" id="idAllTagsAdded">
+                                
+                                
+                              </div>
+                              <div class="prev_tags" id="idPrevTags">
+                               
+                                
+                              </div>
+                        </div>
                     </div>
                     <div class="cont-form-date">
                         <div class="cont-date">

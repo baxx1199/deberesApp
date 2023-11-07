@@ -149,3 +149,34 @@ section .form_row .cont_form_group_task{
 section .form_row .cont_form_new_task{
   width: 60%;
 }
+.cont_groups, .cont_tags{
+  display: flex;
+  flex-direction: column;
+}
+.areaSeeTags{
+  width: 100%;
+  min-height: 50px;
+}
+.allTagsAdded
+{
+  width: 60%;
+  background: red;
+}
+.prev_tags{
+  width: 30%;
+  margin: 10px auto;
+}
+.cont_tag{
+  box-sizing: border-box;
+  width: max-content;
+  padding: 5px 20px;
+  border-radius: 15px;
+  border: 2px solid white;
+  color: white;
+  text-transform: capitalize;
+}
+
+.btnDeleteTag{
+  cursor: pointer;
+  font-weight: bolder;
+}

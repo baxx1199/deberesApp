@@ -8,14 +8,16 @@ const task_name = document.getElementById("txtName"),
   task_description = document.getElementById("txtDescription"),
   task_id_code = document.getElementById("txtId"),
   modal_cont = document.getElementById("cont-modal"),
-  name_group_options_datalist = document.getElementById("list_task_groups_names"),
-  txt_name_group_input=document.getElementById("id_txt_name_group"),
+  name_group_options_datalist = document.getElementById(
+    "list_task_groups_names"
+  ),
+  txt_name_group_input = document.getElementById("id_txt_name_group"),
   txtNameGroup_group = document.getElementById("txtNameGroup"),
   input_tags = document.getElementById("id_txt_name_tag");
 
-
 const btn_save = document.getElementById("btnSave");
 const btn_save_group = document.getElementById("btnSave_group");
+const btnAddTag = document.getElementById("btnAddtag");
 const myStorage = window.localStorage;
 
 let task_card_cont = document.getElementById("cont");
@@ -27,6 +29,7 @@ let lastedTask = [];
 let activeTask = [];
 let task;
 let tags = ["trabajo", "estudio", "salud", "hogar"];
+let temporalTagsForCreation = [];
 
 /* 
    1. Verificar que tareas existen en el almacenamiento
@@ -66,18 +69,18 @@ function get_counterID_from_storage() {
   counter = Number(myStorage.getItem("tasksCode_id"));
 }
 
-function set_tasks_groups_to_localstorage(){
-  myStorage.setItem("groups_task", JSON.stringify(group_task))
+function set_tasks_groups_to_localstorage() {
+  myStorage.setItem("groups_task", JSON.stringify(group_task));
 }
 
-function get_tasks_groups_from_storage(){
-  let temp = JSON.parse(myStorage.getItem("groups_task"))
-  group_task =[]
-  if(temp == null){
+function get_tasks_groups_from_storage() {
+  let temp = JSON.parse(myStorage.getItem("groups_task"));
+  group_task = [];
+  if (temp == null) {
     return;
   }
-  if(temp.length){
-    group_task=temp
+  if (temp.length) {
+    group_task = temp;
   }
 }
 
@@ -99,8 +102,8 @@ function validation_of_inputs(e) {
 }
 
 function save_task(e) {
-  console.log("validando hasgdhasbdhjkasbdj")
-  const nameGroup =txt_name_group_input.value
+  console.log("validando hasgdhasbdhjkasbdj");
+  const nameGroup = txt_name_group_input.value;
 
   let newTask = new Task(
     task_name.value,
@@ -110,14 +113,12 @@ function save_task(e) {
     counter
   );
 
-  console.log(newTask)
+  console.log(newTask);
 
   if (!validation_of_inputs(e)) {
     console.log("error");
     return;
   }
-
-  
 
   if (btn_save.textContent == "actualizar") {
     task = tasks[get_position_in_array(task_id_code.value)];
@@ -132,39 +133,33 @@ function save_task(e) {
   }
 
   if (btn_save.textContent == "Guardar") {
+    if (nameGroup != "") {
+      console.log("valido el nombre de grupo");
+      let existGroup = validateIsNewGroup(nameGroup);
+      console.log(existGroup);
 
-    if(nameGroup != ""){
-      console.log("valido el nombre de grupo")
-      let existGroup= validateIsNewGroup(nameGroup)
-      console.log(existGroup)
-      
-      if(!existGroup){
-        console.log("no existia")
-        addNewTaskGroup(nameGroup)
+      if (!existGroup) {
+        console.log("no existia");
+        addNewTaskGroup(nameGroup);
       }
 
-      let indexGroup = findIndexGroupTaskByName(nameGroup)
-        
-      add_task_to_group(indexGroup, newTask)
-      console.log("tarea de grupo")
+      let indexGroup = findIndexGroupTaskByName(nameGroup);
+
+      add_task_to_group(indexGroup, newTask);
+      console.log("tarea de grupo");
       counter++;
       send_counterID_to_storage();
       set_tasks_groups_to_localstorage();
-     
     }
-    if(nameGroup.value == ""){
-
-      console.log("tarea individual")
+    if (nameGroup.value == "") {
+      console.log("tarea individual");
       get_task_From_storage();
       get_counterID_from_storage();
 
-      
       tasks.push(newTask);
       counter++;
       send_counterID_to_storage();
     }
-
-    
   }
 
   send_task_to_storage();
@@ -397,7 +392,7 @@ function separeteRemaing() {
 let group_task = [];
 
 function add_task_to_group(idGroup, task) {
-      group_task[idGroup].tasks_of_group.push(task)
+  group_task[idGroup].tasks_of_group.push(task);
 }
 
 function createTaskGroup(e) {
@@ -407,7 +402,7 @@ function createTaskGroup(e) {
   let isNew = true;
 
   if (group_task.length > 0) {
-    isNew = validateIsNewGroup(nameGroup)
+    isNew = validateIsNewGroup(nameGroup);
   }
 
   if (isNew) {
@@ -422,58 +417,93 @@ function createTaskGroup(e) {
 
 function addNewTaskGroup(nameGroup) {
   group_task.push(new GroupTask(counter_id_group, nameGroup));
-    counter_id_group++;
-    alert("Grupo creado con éxito.");
-    set_tasks_groups_to_localstorage();
+  counter_id_group++;
+  alert("Grupo creado con éxito.");
+  set_tasks_groups_to_localstorage();
 }
 
 //return a Object type GroupType if this exist in the array
 function findIndexGroupTaskByName(nameGroup) {
-  return group_task.findIndex(tasks => tasks.group_name === nameGroup);
+  return group_task.findIndex((tasks) => tasks.group_name === nameGroup);
 }
 
-
-function validateIsNewGroup(nameGroup){
-  let prueaba = group_task.some(task=>task.group_name.toUpperCase() === nameGroup.toUpperCase())
-  console.log(prueaba) 
-  return prueaba
+function validateIsNewGroup(nameGroup) {
+  let prueaba = group_task.some(
+    (task) => task.group_name.toUpperCase() === nameGroup.toUpperCase()
+  );
+  console.log(prueaba);
+  return prueaba;
 }
 
 function get_name_group_from_input() {
-  return txtNameGroup.value
-  
+  return txtNameGroup.value;
 }
-function set_name_group_in_dataList(){
-  console.log(group_task)
-  let optionsString= ""
+function set_name_group_in_dataList() {
+  console.log(group_task);
+  let optionsString = "";
 
   for (let i = 0; i < group_task.length; i++) {
-    optionsString+=` <option value="${group_task[i].group_name}"></option>`
-    
+    optionsString += ` <option value="${group_task[i].group_name}"></option>`;
   }
-  name_group_options_datalist.innerHTML = optionsString
+  name_group_options_datalist.innerHTML = optionsString;
 }
-
-
 
 /*  */
 
-function set_preview_tag(){
+function set_preview_tag() {
+  const newTag = input_tags.value;
+  const areaPreview = document.getElementById("idPrevTags");
 
+  console.log(areaPreview)
+  let strPrevTag = `
+          <div class="cont_tag"> ${newTag} </div>
+    `;
+  areaPreview.innerHTML = strPrevTag;
 }
 
-function save_tag(){
+function save_tag(e) {
+  e.preventDefault();
+  const newTag = input_tags.value;
+  const areaPreview = document.getElementById("idPrevTags");
+  if (!newTag.length) {
+    alert("no puede incluir etiquetas vacías.");
+    return;
+  }
+  if (temporalTagsForCreation.length == 3) {
+    alert("Solo puede agregar tres etiquetas por tarea.");
+    return;
+  }
+  if (temporalTagsForCreation.includes(newTag)) {
+    alert("Esta etiqueta ya se encuentra agregada.");
+    return;
+  }
 
+  if (!tags.includes(newTag)) {
+    tags.push(newTag);
+  }
+  temporalTagsForCreation.push(newTag);
+
+  input_tags.value = "";
+  areaPreview.innerHTML=""
+  renderTags()
 }
-
-
-
-
-
-
+function renderTags() {
+  console.log("renderizando")
+  const areaPreview = document.getElementById("idAllTagsAdded");
+  let strTags =""
+  temporalTagsForCreation.forEach((element, index) => {
+    strTags +=`<div class="cont_tag"> ${element} <small  onclick="deleteTag(${index})" data-index-number="${index}" class="btnDeleteTag">X</small> </div>`
+  });
+  areaPreview.innerHTML= strTags
+}
+function deleteTag(idElement){
+    temporalTagsForCreation.slice(idElement, 0)
+}
 /* assigment of the events */
 btn_save.addEventListener("click", save_task);
-btn_save_group.addEventListener("click", createTaskGroup)
+btn_save_group.addEventListener("click", createTaskGroup);
+btnAddTag.addEventListener("click", save_tag);
+input_tags.addEventListener("keydown", set_preview_tag);
 
 window.addEventListener("load", () => {
   create_card();
@@ -481,7 +511,5 @@ window.addEventListener("load", () => {
   get_tasks_groups_from_storage();
   set_name_group_in_dataList();
 });
-
-
 
 /* Add a method to check if a task is null This task must be deleted and release its identifier number*/
