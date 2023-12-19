@@ -13,7 +13,8 @@ const task_name = document.getElementById("txtName"),
   ),
   txt_name_group_input = document.getElementById("id_txt_name_group"),
   txtNameGroup_group = document.getElementById("txtNameGroup"),
-  input_tags = document.getElementById("id_txt_name_tag");
+  input_tags = document.getElementById("id_txt_name_tag"),
+  priority = document.getElementsByName("priority_lv");
 
 const btn_save = document.getElementById("btnSave");
 const btn_save_group = document.getElementById("btnSave_group");
@@ -104,19 +105,22 @@ function validation_of_inputs(e) {
 function save_task(e) {
   console.log("validando hasgdhasbdhjkasbdj");
   const nameGroup = txt_name_group_input.value;
-
+  let priorityLvlSelect = getPriority();
+   console.log(priorityLvlSelect)
   let newTask = new Task(
     task_name.value,
     initial_date.value,
     final_date.value,
     task_description.value,
-    counter
+    counter,
+    temporalTagsForCreation,
+    priorityLvlSelect
   );
 
   console.log(newTask);
 
   if (!validation_of_inputs(e)) {
-    console.log("error");
+    console.error("error");
     return;
   }
 
@@ -134,12 +138,9 @@ function save_task(e) {
 
   if (btn_save.textContent == "Guardar") {
     if (nameGroup != "") {
-      console.log("valido el nombre de grupo");
       let existGroup = validateIsNewGroup(nameGroup);
-      console.log(existGroup);
 
       if (!existGroup) {
-        console.log("no existia");
         addNewTaskGroup(nameGroup);
       }
 
@@ -181,6 +182,18 @@ function clean_inputs() {
   final_date.value = "";
   task_description.value = "";
   txt_name_group_input.value = "";
+}
+
+function getPriority() {
+  console.log(priority)
+  let prioritySelect = null
+  for(let i =0; i< priority.length;i++){
+    if(priority[i].checked){
+      console.log(priority[i].value)
+      return priority[i].value;
+    }
+  }
+  return prioritySelect
 }
 
 /* This method creates all task cards that are in storage */
@@ -321,47 +334,45 @@ function update_task(id) {
 /* This method opens a modal that displays all the details of the selected task */
 function see_details_task(id) {
   let position = get_position_in_array(id);
-  let string_modal = "";
-  let task_for_modal, remaining;
-
-  if (position == -1) {
-    alert("tarea no encontrada");
+  if (position === -1) {
+    alert("Tarea no encontrada");
     return;
   }
 
-  task_for_modal = tasks[position];
-  remaining = new RemainingDay(task_for_modal.final_date, new Date());
-  string_modal = `
-  <button class="btn_close" id="btn_close">X</button>
-  <div class="modal_header">
-      <h2>${task_for_modal.task_name}</h2>
-      <small class="remaining" id="days_remaining_modal">${remaining.remaining_ToString()}</small>
-  </div>
-  <div class="cont-dates">
+  const task_for_modal = tasks[position];
+  const remaining = new RemainingDay(task_for_modal.final_date, new Date());
+  const remainingTime = remaining.remaining_ToString();
 
-      <small class="date_label_modal start_date">Inicio de tarea: <span>${format_date(
-        task_for_modal.initial_date
-      )}</span></small>
-      <small class="date_label_modal final_date">Final de la tarea: <span>${format_date(
-        task_for_modal.final_date
-      )}</span></small>
-  </div>
-  <div class="modal_group">
-      <small>Grupo: <span class="group-name">proyecto 1</span>   </small>
-  </div>
-  <p class="description_modal">
-    ${task_for_modal.description_task}
-  </p>
-  <small class="level">prioridad: <span class="level-tag level-tag-mid">medio</span> <span class="level-tag level-tag-low">baja</span> <span class="level-tag level-tag-high">alta</span></small>
-  
-  <div class="modal_tags">
-      tags:
-      <ul>
-          <li>salud</li>
-          <li>estudio</li>
-          <li>juego</li>
-      </ul>
-  </div>
+  const string_modal = `
+    <button class="btn_close" id="btn_close">X</button>
+    <div class="modal_header">
+        <h2>${task_for_modal.task_name}</h2>
+        <small class="remaining" id="days_remaining_modal">${remainingTime}</small>
+    </div>
+    <div class="cont-dates">
+        <small class="date_label_modal start_date">Inicio de tarea: <span>${format_date(
+            task_for_modal.initial_date
+        )}</span></small>
+        <small class="date_label_modal final_date">Final de la tarea: <span>${format_date(
+            task_for_modal.final_date
+        )}</span></small>
+    </div>
+    <div class="modal_group">
+        <small>Grupo: <span class="group-name">${task_for_modal.group_name}</span></small>
+    </div>
+    <p class="description_modal">
+        ${task_for_modal.description_task}
+    </p>
+    <small class="level">prioridad: <span class="level-tag level-tag-mid">medio</span> <span class="level-tag level-tag-low">baja</span> <span class="level-tag level-tag-high">alta</span></small>
+    
+    <div class="modal_tags">
+        tags:
+        <ul>
+            <li>salud</li>
+            <li>estudio</li>
+            <li>juego</li>
+        </ul>
+    </div>
   `;
 
   document.getElementById("modal").innerHTML = string_modal;
@@ -370,21 +381,18 @@ function see_details_task(id) {
 }
 
 function separeteRemaing() {
-  let endingTasks = [];
-  let remainTasks = [];
+  lastedTask = [];
+  activeTask = [];
 
   tasks.forEach((task) => {
-    let rem = new RemainingDay(task.final_date, new Date());
-    console.log(rem);
-    if (rem == "Vencida") {
-      endingTasks.push(task);
+    const remaining = new RemainingDay(task.final_date, new Date());
+    if (remaining.remaining_ToString() === "Vencida") {
+      lastedTask.push(task);
     } else {
-      remainTasks.push(task);
+      activeTask.push(task);
     }
   });
 
-  lastedTask = endingTasks;
-  activeTask = remainTasks;
   console.log(lastedTask);
   console.log(activeTask);
 }
@@ -428,17 +436,17 @@ function findIndexGroupTaskByName(nameGroup) {
 }
 
 function validateIsNewGroup(nameGroup) {
-  let prueaba = group_task.some(
+  let prueba = group_task.some(
     (task) => task.group_name.toUpperCase() === nameGroup.toUpperCase()
   );
-  console.log(prueaba);
-  return prueaba;
+  return prueba;
 }
 
 function get_name_group_from_input() {
   return txtNameGroup.value;
 }
 function set_name_group_in_dataList() {
+  console.log("havbsdasjhdaskjdasjkdasbdkjbcxjba")
   console.log(group_task);
   let optionsString = "";
 
@@ -506,7 +514,7 @@ btnAddTag.addEventListener("click", save_tag);
 input_tags.addEventListener("keydown", set_preview_tag);
 
 window.addEventListener("load", () => {
-  create_card();
+  //create_card();
   separeteRemaing();
   get_tasks_groups_from_storage();
   set_name_group_in_dataList();
