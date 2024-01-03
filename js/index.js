@@ -22,6 +22,7 @@ const btnAddTag = document.getElementById("btnAddtag");
 const myStorage = window.localStorage;
 
 let task_card_cont = document.getElementById("cont");
+let task_card_cont_groups = document.getElementById("cont-groups");
 let counter = 0;
 let counter_id_group = 0;
 
@@ -137,7 +138,9 @@ function save_task(e) {
   }
 
   if (btn_save.textContent == "Guardar") {
-    if (nameGroup != "") {
+    console.log(nameGroup)
+
+    if (nameGroup.value != "") {
       let existGroup = validateIsNewGroup(nameGroup);
 
       if (!existGroup) {
@@ -152,7 +155,8 @@ function save_task(e) {
       send_counterID_to_storage();
       set_tasks_groups_to_localstorage();
     }
-    if (nameGroup.value == "") {
+    
+    if (nameGroup == "") {
       console.log("tarea individual");
       get_task_From_storage();
       get_counterID_from_storage();
@@ -207,12 +211,12 @@ function create_card() {
 
   tasks.forEach((task) => {
     if (task != null) {
-      remaining = new RemainingDay(task.final_date, new Date()); //get the remaining time of the actually task
+      //remaining = new RemainingDay(task.final_date, new Date()); //get the remaining time of the actually task
       string_card += ` 
           <div class="card" >
               <div class="card_header">
                   <h3>${task.task_name}</h3>
-                  <small class="remaining" id="days_remaining">${remaining.remaining_ToString()}</small>
+                  <small class="remaining" id="days_remaining">3</small>
               </div>
                   <small class="date_label start_date">Inicio: <span>${format_date(
                     task.initial_date
@@ -341,13 +345,13 @@ function see_details_task(id) {
 
   const task_for_modal = tasks[position];
   const remaining = new RemainingDay(task_for_modal.final_date, new Date());
-  const remainingTime = remaining.remaining_ToString();
+ // const remainingTime = remaining.remaining_ToString();
 
   const string_modal = `
     <button class="btn_close" id="btn_close">X</button>
     <div class="modal_header">
         <h2>${task_for_modal.task_name}</h2>
-        <small class="remaining" id="days_remaining_modal">${remainingTime}</small>
+        <small class="remaining" id="days_remaining_modal">3</small>
     </div>
     <div class="cont-dates">
         <small class="date_label_modal start_date">Inicio de tarea: <span>${format_date(
@@ -446,14 +450,13 @@ function get_name_group_from_input() {
   return txtNameGroup.value;
 }
 function set_name_group_in_dataList() {
-  console.log("havbsdasjhdaskjdasjkdasbdkjbcxjba")
-  console.log(group_task);
   let optionsString = "";
 
   for (let i = 0; i < group_task.length; i++) {
     optionsString += ` <option value="${group_task[i].group_name}"></option>`;
   }
   name_group_options_datalist.innerHTML = optionsString;
+  console.log(optionsString);
 }
 
 /*  */
@@ -507,6 +510,31 @@ function renderTags() {
 function deleteTag(idElement){
     temporalTagsForCreation.slice(idElement, 0)
 }
+
+/**
+ *  mostrar tareas
+ * 
+ */
+
+function printAllTask() {
+  let strHtmlGroupTask =""
+ 
+
+  for (let i = 0; i < group_task.length; i++) {
+    let strHtmlTaskOfGroup =''
+    for (let j = 0; j < group_task[i].tasks_of_group.length; j++) {
+      strHtmlTaskOfGroup+=`<li>${group_task[i].tasks_of_group[j].task_name}</li>` 
+    }
+    strHtmlGroupTask += `<div class="card">
+                      <h2> ${group_task[i].group_name}</h2>
+                      <br>
+                      <ul>${strHtmlTaskOfGroup}</ul>
+                </div>`
+  }
+  task_card_cont_groups.innerHTML = strHtmlGroupTask
+  console.log(group_task)
+}
+
 /* assigment of the events */
 btn_save.addEventListener("click", save_task);
 btn_save_group.addEventListener("click", createTaskGroup);
@@ -514,10 +542,11 @@ btnAddTag.addEventListener("click", save_tag);
 input_tags.addEventListener("keydown", set_preview_tag);
 
 window.addEventListener("load", () => {
-  //create_card();
-  separeteRemaing();
+  create_card();
+  //separeteRemaing();
   get_tasks_groups_from_storage();
   set_name_group_in_dataList();
+  printAllTask()
 });
 
 /* Add a method to check if a task is null This task must be deleted and release its identifier number*/
