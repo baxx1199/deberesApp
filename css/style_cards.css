@@ -112,3 +112,11 @@
 .op_details {
   background: rgba(128, 241, 94, 0.647);
 }
+
+.card_task_group{
+  cursor: pointer;
+}
+.card_task_group> ul > li{
+  list-style: none;
+  text-transform: capitalize;
+}

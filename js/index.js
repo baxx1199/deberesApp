@@ -104,7 +104,6 @@ function validation_of_inputs(e) {
 }
 
 function save_task(e) {
-  console.log("validando hasgdhasbdhjkasbdj");
   const nameGroup = txt_name_group_input.value;
   let priorityLvlSelect = getPriority();
    console.log(priorityLvlSelect)
@@ -117,6 +116,7 @@ function save_task(e) {
     temporalTagsForCreation,
     priorityLvlSelect
   );
+  console.log(newTask.finalDate)
 
   console.log(newTask);
 
@@ -453,7 +453,7 @@ function set_name_group_in_dataList() {
   let optionsString = "";
 
   for (let i = 0; i < group_task.length; i++) {
-    optionsString += ` <option value="${group_task[i].group_name}"></option>`;
+    optionsString += ` <option value="${group_task[i].group_name}">${group_task[i].group_name}</option>`;
   }
   name_group_options_datalist.innerHTML = optionsString;
   console.log(optionsString);
@@ -523,9 +523,10 @@ function printAllTask() {
   for (let i = 0; i < group_task.length; i++) {
     let strHtmlTaskOfGroup =''
     for (let j = 0; j < group_task[i].tasks_of_group.length; j++) {
+      betaRemaining(group_task[i].tasks_of_group[j].final_date)
       strHtmlTaskOfGroup+=`<li>${group_task[i].tasks_of_group[j].task_name}</li>` 
     }
-    strHtmlGroupTask += `<div class="card">
+    strHtmlGroupTask += `<div class="card card_task_group">
                       <h2> ${group_task[i].group_name}</h2>
                       <br>
                       <ul>${strHtmlTaskOfGroup}</ul>
@@ -548,5 +549,14 @@ window.addEventListener("load", () => {
   set_name_group_in_dataList();
   printAllTask()
 });
+
+function betaRemaining(finalDate) {
+  let currenteDate = new Date()
+
+  console.log(finalDate)
+  console.log(currenteDate)
+  console.log(finalDate-currenteDate)
+  
+}
 
 /* Add a method to check if a task is null This task must be deleted and release its identifier number*/
