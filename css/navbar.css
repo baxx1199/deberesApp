@@ -12,7 +12,17 @@ header nav {
 header a,
 nav > a {
   text-decoration: none;
+  color: var(--shadow-color);
+  font-weight: bold;
+}
+header > a, .primaryBtn{
   color: var(--text-color-one);
+}
+
+.dashboard h2{
+  width: 80%;
+  margin: auto;
+  text-transform: capitalize;
 }
 
 .title-and-options {
@@ -55,9 +65,55 @@ nav > a {
     background-color: var(--auxiliar-background-color);
     flex-basis: 320px;
     flex-grow: 1;
-    border: 1px solid black;
+    border: 1px solid var(--shadow-color);
     border-radius: 3px;
     color: var(--text-color-one);
     padding: 1rem 2rem;
     box-sizing: border-box;
+    max-width: fit-content;
+}
+.headerCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.headerCard h2{
+  width: fit-content;
+  margin: 0;
+}
+
+.bodyCard .bodyCardRow{
+  margin: 1rem auto;
+  padding: 1rem;
+  gap: 10px;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.row >small{
+  color: var(--text-color-one) !important;
+}
+
+.bodyCard .bodyCardRow .bodyCardCol{
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bodyCard .bodyCardRow .bodyCardCol small{
+font-size: 1rem;
+color: var(--text-color-two);
+}
+
+
+.bodyCard .bodyCardRow .bodyCardCol .tagStatus{
+ padding: 5px 1rem;
+ border-radius: 50px;
+ border: 1px solid var(--shadow-color);
 }
