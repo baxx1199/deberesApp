@@ -6,215 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Que debo hacer?</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/style_cards.css">
     <link rel="stylesheet" href="css/modal.css">
 </head>
 
 <body>
     <header>
-        <a href="#">
+        <a href="/">
             <span>#</span>
         </a>
         <nav>
             <a href="vistas/tasks.html">Tasks</a>
-            <a href="vistas/tasks.html">Projects</a>
-            <a href="vistas/tasks.html">Calendar</a>
-            <a href="vistas/tasks.html">Reports</a>
-            <a href="vistas/tasks.html">Settings</a>
+            <a href="vistas/projects.html">Projects</a>
+            <a href="vistas/calendar.html">Calendar</a>
+            <a href="vistas/reports.html">Reports</a>
+            <a href="vistas/settings.html">Settings</a>
         </nav>
     </header>
-    <section>
-        <!-- <div class="form_row">
-            <div class="cont_form_new_task">
 
-            <div class="cont-form">
-
-                <div>
-
-                    <h2>Agregar tarea</h2>
+    <section class="mainInfo">
+        <div class="aboutUs">
+            <h2 class="slogan">Lorem ipsum dolor sit amet.</h2>
+            <div class="description">
+                <p>Our task management app helps you stay organized and productive. Create tasks, assign them to team
+                    members, and track progress with ease.</p>
+                <div class="btnsActions">
+                    <a href="vistas/login.html" class="btnGet">Get Started</a>
+                    <a href="/" class="btnMore">Learn more</a>
                 </div>
-                <form action="">
-
-                    <input type="hidden" name="id_task" id="txtId">
-
-                    <label for="txtName">Nombre de la tarea</label>
-                    <input type="text" name="name" id="txtName">
-                    
-                    <div class="cont_groups">
-                        <label for="txt_name_group">Grupo</label>
-                        <input type="text" list="list_task_groups_names"  placeholder="seleccione un grupo" name="txt_name_group" id="id_txt_name_group" >
-
-                        <datalist id="list_task_groups_names" >
-                            
-                          </datalist>
-                    </div>
-                    <div class="cont_tags">
-                        <label for="txt_name_tag">Tags</label>
-                        <div class="cont_creation_tag_area">
-                            <input type="text" list="list_task_name_tags"  placeholder="Ej: Cumpleaños" name="txt_name_tag" id="id_txt_name_tag" >
-                            <button id="btnAddtag">Agregar</button>                         
-                        </div>
-
-                        <datalist id="list_task_name_tags" >
-                            
-                        </datalist>
-                        <div class="areaSeeTags">
-                            <div class="allTagsAdded" id="idAllTagsAdded">
-                                
-                                
-                              </div>
-                              <div class="prev_tags" id="idPrevTags">
-                               
-                                
-                              </div>
-                        </div>
-                    </div>
-                    <div class="cont-form-date">
-                        <div class="cont-date">
-
-                            <label for="pickerDateStart">Fecha inicio:</label>
-                            <input type="datetime-local" name="startDate" id="pickerDateStart">
-                        </div>
-
-                        <div class="cont-date">
-
-                            <label for="pickerDateFinal">Fecha limite:</label>
-                            <input type="datetime-local" name="finaleDate" id="pickerDateFinal">
-                        </div>
-                    </div>
-
-                    <label for="txtDescription">Descripcion de la tarea</label>
-                    <input type="text" name="description" id="txtDescription">
-                    <div class="priority_area">
-
-
-                        <label for="priority">Prioridad</label>
-                        <div class="rd_area">
-
-
-                            <label for="priority_lv_1">Baja</label>
-                            <input type="radio" name="priority_lv" id="rd_priority_lv_1" value="lv_1">
-                            <label for="priority_lv_2">Media</label>
-                            <input type="radio" name="priority_lv" id="rd_priority_lv_2" value="lv_2">
-                            <label for="priority_lv_3">Alta</label>
-                            <input type="radio" name="priority_lv" id="rd_priority_lv_3" value="lv_3">
-                        </div>
-                    </div>
-
-                    <button id="btnSave">Guardar</button>
-                </form>
             </div>
         </div>
-            <div class="cont_form_group_task">
-                <div class="cont-form">
-
-                    <div>
-
-                        <h2>Nuevo Grupo de tareas</h2>
-                    </div>
-                    <form action="">
-
-                        <input type="hidden" name="id_task_group" id="txtIdGroup">
-
-                        <label for="txtName">Nombre del grupo</label>
-                        <input type="text" name="name_group" id="txtNameGroup">
-                        
-
-                        <button id="btnSave_group">Guardar</button>
-                    </form>
-                </div>
-            </div>
-        </div> -->
-        <div class="cont-workshop">
-            <div class="cont-workshop-title">
-
-                <h2>Tareas pendientes</h2>
-            </div>
-
-            <h3>Grupos</h3>
-            <div class="cont" id="cont-groups">
-
-
-                <!-- <div class="card" id="card">
-
-                    <div class="card_header">
-                        <h3>titulo</h3>
-                        <small class="remaining" id="days_remaining">3 days</small>
-                    </div>
-                    
-                    <small class="date_label start_date">Inicio: <span>00/00/00 00:00hrs</span></small>
-                    <small class="date_label final_date">Final: <span>00/00/00 00:00hrs</span></small>
-                    <p class="card_decription">
-                        Lorem ipsum dolor sit amet.
-                    </p>
-                    <div class="options">
-                        <button class="op op_edit" id="btnEdit" >Editar</button>
-                        <button class="op op_delete" id="btnDelete" onclick="delete_task(task.id_task)">Eliminar</button>
-                        <button class="op op_details" id="btnDetails">Ver</button>
-                    </div>
-                </div> -->
-            </div>
-            <h3>tareas</h3>
-            <div class="cont" id="cont">
-
-
-                <!-- <div class="card" id="card">
-
-                    <div class="card_header">
-                        <h3>titulo</h3>
-                        <small class="remaining" id="days_remaining">3 days</small>
-                    </div>
-                    
-                    <small class="date_label start_date">Inicio: <span>00/00/00 00:00hrs</span></small>
-                    <small class="date_label final_date">Final: <span>00/00/00 00:00hrs</span></small>
-                    <p class="card_decription">
-                        Lorem ipsum dolor sit amet.
-                    </p>
-                    <div class="options">
-                        <button class="op op_edit" id="btnEdit" >Editar</button>
-                        <button class="op op_delete" id="btnDelete" onclick="delete_task(task.id_task)">Eliminar</button>
-                        <button class="op op_details" id="btnDetails">Ver</button>
-                    </div>
-                </div> -->
-            </div>
+        <div class="banner">
+            <img src="assets/images/backgroundimg.jpeg" alt="images of tasks board" title="images task board">
         </div>
     </section>
 
-    
-    <div class="cont-modal" id="cont-modal">
-        <div class="modal" id="modal">
-            <!-- <button class="btn_close"  id="btn_close" >X</button>
-            <div class="modal_header">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <small class="remaining" id="days_remaining_modal">3 days</small>
-            </div>
-            <div class="cont-dates">
-
-                <small class="date_label_modal start_date">Inicio de tarea: <span>00/00/00 00:00hrs</span></small>
-                <small class="date_label_modal final_date">Final de la tarea: <span>00/00/00 00:00hrs</span></small>
-            </div>
-            <div class="modal_group">
-                <small>Grupo: <span class="group-name">proyecto 1</span> </small>
-            </div>
-            <p class="description_modal">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem accusantium aliquam rerum eligendi
-                delectus tempore ab consequuntur. Nulla, eum ex!
-            </p>
-            <small class="level">prioridad: <span class="level-tag level-tag-mid">medio</span> <span
-                    class="level-tag level-tag-low">baja</span> <span
-                    class="level-tag level-tag-high">alta</span></small>
-
-            <div class="modal_tags">
-                tags:
-                <ul>
-                    <li>salud</li>
-                    <li>estudio</li>
-                    <li>juego</li>
-                </ul>
-            </div> -->
+    <footer>
+        <div class="brand">
+            <span>#</span>
+            <small>Powered by Baxx</small>
         </div>
-    </div>
-    <script src="js/index.js" type="module"></script>
+            <nav>
+                <a>Privacy Policy</a>
+                <a>Terms and Conditions of Use</a>
+            </nav>
+    </footer>
 </body>
 
 </html>

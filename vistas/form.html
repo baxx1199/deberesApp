@@ -1,11 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>new tas</title>
+    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 </head>
+
 <body>
-    
+    <header>
+        <a href="../index.html">
+            <span>#</span>
+        </a>
+        <nav>
+            <a href="tasks.html">Tasks</a>
+            <a href="projects.html">Projects</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="reports.html">Reports</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>
+    <section class="sectionForm">
+        <div class="contForm">
+
+
+            <h2 class="">New Task</h2>
+            <form action="">
+
+
+                <input type="hidden" name="id_task" id="txtId">
+
+                <label for="txtName">Nombre de la tarea</label>
+                <input type="text" name="name" id="txtName">
+                <div class="cont-form-date">
+                    <div class="cont-date">
+
+                        <label for="pickerDateStart">Fecha inicio:</label>
+                        <input type="datetime-local" name="startDate" id="pickerDateStart">
+                        <div class="labelNow">
+
+                            <input type="checkbox" name="timeNow" id="timeNowId">
+                        <label for="timeNowId">Now</label>
+                        </div>
+                    </div>
+
+                    <div class="cont-date">
+
+                        <label for="pickerDateFinal">Fecha limite:</label>
+                        <input type="datetime-local" name="finaleDate" id="pickerDateFinal">
+                    </div>
+                </div>
+                <label for="txtDescription">Descripcion de la tarea</label>
+                <input type="text" name="description" id="txtDescription">
+
+                <div class="cont_groups">
+                    <label for="txt_name_group">Grupo</label>
+                    <input type="text" list="list_task_groups_names" placeholder="seleccione un grupo"
+                        name="txt_name_group" id="id_txt_name_group">
+
+                    <datalist id="list_task_groups_names">
+
+                    </datalist>
+                </div>
+
+
+
+
+                <div class="priority_area">
+
+
+                    <label for="priority">Prioridad</label>
+                    <div class="rd_area">
+
+
+                        <input type="radio"  name="priority_lv" id="rd_priority_lv_1" value="lv_1">
+                        <label for="rd_priority_lv_1" class="lblRadio lowP">Baja</label>
+                        <input type="radio"  name="priority_lv" id="rd_priority_lv_2" value="lv_2">
+                        <label for="rd_priority_lv_2" class="lblRadio midP">Media</label>
+                        <input type="radio"  name="priority_lv" id="rd_priority_lv_3" value="lv_3">
+                        <label for="rd_priority_lv_3" class="lblRadio highP">Alta</label>
+                    </div>
+                </div>
+                <div class="cont_tags">
+                    <label for="txt_name_tag">Tags</label>
+                    <div class="cont_creation_tag_area">
+                        <input type="text" list="list_task_name_tags" placeholder="Ej: Cumpleaños" class="inputTags" name="txt_name_tag"
+                            id="id_txt_name_tag">
+                        <button id="btnAddtagId" class="btnAddTag" type="button">Agregar</button>
+                    </div>
+
+                    <datalist id="list_task_name_tags">
+
+                    </datalist>
+                    <div class="areaSeeTags">
+                        <div class="allTagsAdded" id="idAllTagsAdded">
+
+
+                        </div>
+                        <div class="prev_tags" id="idPrevTags">
+
+
+                        </div>
+                    </div>
+                </div>
+                <button id="btnSaveId"  class="btnSave">Guardar</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="../js/form.js" type="module"></script>
+    <script src="../js/index.js" type="module"></script>
 </body>
+
 </html>

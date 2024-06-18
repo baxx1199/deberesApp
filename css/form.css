@@ -1,0 +1,133 @@
+.sectionForm{
+    width: 90%;
+    margin: auto;
+}
+.sectionForm .contForm{
+    width: 50%;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 3rem 2rem;
+}
+.sectionForm .contForm h2{
+    color: var(--text-color-one);
+}
+.sectionForm form{
+    margin: auto;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+}
+.sectionForm form label{
+    color: var(--text-color-one);
+    margin: 1rem 0 0 0;
+    display: flex;
+    font-size: 1rem;
+}
+.sectionForm form input{
+    height: 40px;
+    outline: none;
+    border:1px solid var(--shadow-color);
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 0 1rem;
+}
+
+.sectionForm form button{
+    height: 40px;
+    outline: none;
+    border:1px solid var(--shadow-color);
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+.labelNow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.labelNow >label{
+    margin: 0 10px !important;
+}
+.cont-form-date{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.cont_groups{
+    display: flex;
+    flex-direction: column;
+}
+.cont-form-date .cont-date{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+.btnSave{
+    background-color: var(--text-color-one);
+    color: #fff;
+    margin-top: 1rem;
+}
+.rd_area{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+label.lblRadio {
+    padding: 1rem 2rem;
+    border: 1px solid var(--shadow-color);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-grow: 1;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.rd_area input[type="radio"]{
+    display: none;
+}
+.rd_area input[type="radio"]:checked + label.lowP{
+    background-color: rgb(0, 225, 255);
+}
+.rd_area input[type="radio"]:checked + label.midP{
+    background-color: rgb(255, 230, 0);
+}
+.rd_area input[type="radio"]:checked + label.highP{
+    background-color: rgb(255, 64, 0);
+}
+.cont_tag {
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    background-color: var(--text-color-two);
+    width: max-content;
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+}
+.small.btnDeleteTag{
+    cursor: pointer;
+    font-weight: bold;
+}
+.allTagsAdded{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.inputTags{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.btnAddTag{
+    color: #fff;
+    background-color: var(--color-prueba);
+    padding: 0.3rem 1rem;
+}

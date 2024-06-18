@@ -41,13 +41,14 @@ header > a, .primaryBtn{
   gap: 5px;
 }
 
-.title-and-options .contBtn button {
+.title-and-options .contBtn a {
   padding: 1rem;
   border: none;
   border-radius: 5px;
   color: var(--text-color-one);
   background-color: var(--button-color-one);
   cursor: pointer;
+  text-decoration: none;
 }
 
 
